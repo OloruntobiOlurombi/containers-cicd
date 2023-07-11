@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code stage
+      - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Set up Docker Buildx
@@ -29,5 +29,5 @@ jobs:
         with:
           context: .
           push: true
-          tags: latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPO }}:latest
 
