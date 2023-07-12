@@ -120,4 +120,18 @@ jobs:
 
 - Make sure you have the DockerHub repository set up and accessible with your DockerHub account. If you haven't created a repository on DockerHub yet, please do so before proceeding.
 
-- Ensure
+- Ensure that you have the correct DockerHub Username, Token and Repository name set in the GitHub repository secrets. Open the GitHub repository and got to the ***"Settings"*** tab. then click on ***"Secrets"***. Make sure you have set the ***`DOCKERHUB_USERNAME`*** secret to your DockerHub username, the ***`DOCKERHUB_TOKEN`*** to your DockerHub token and the ***`DOCKERHUB_REPO`*** secret to your DockerHub repository name.
+  
+<img width="925" alt="Screenshot 2023-07-11 at 11 02 49" src="https://github.com/OloruntobiOlurombi/containers-cicd/assets/40290711/53be3830-62e1-4752-8559-4d7a4f30fb95">
+
+- Commit and push the changes to the GitHub repository.
+
+<img width="564" alt="Screenshot 2023-07-10 at 21 17 48" src="https://github.com/OloruntobiOlurombi/containers-cicd/assets/40290711/2e87bdb8-99cf-4697-b7e1-9b61de0ab13d">
+
+- Confirm the status of the workflow jobs:
+
+<img width="1359" alt="Screenshot 2023-07-11 at 11 01 51" src="https://github.com/OloruntobiOlurombi/containers-cicd/assets/40290711/d6ff9ca2-cc9b-4d71-a577-f6d33bef4729">
+
+
+
+
