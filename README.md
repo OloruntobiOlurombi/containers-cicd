@@ -24,3 +24,100 @@ def hello_world():
 if __name__ == '__main__':
     app.run(host='0.0.0.0')
 ```
+
+- Save the file.
+
+#### Step 2: Create a Dockerfile 
+- In the same directory as the ***`app.py`*** file, create a new file called Dockerfile (without any file extension) and open it in a text editor. Add the following content to the file:
+
+```
+FROM python:3.9-slim
+
+WORKDIR /app
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
+
+EXPOSE 5000
+
+CMD ["python", "app.py"]
+```
+- Save the file.
+
+#### Step 3: Create a requirements.txt file
+- Create a new file called ***`requirements.txt`*** in the project directory and add the following line to it:
+
+```
+flask
+```
+- Save the file.
+
+#### Step 4: Build the Docker Image
+- Open a terminal or command prompt and navigate to the project directory. Run the following command to build the Docker image:
+  
+<img width="1023" alt="a" src="https://github.com/OloruntobiOlurombi/containers-cicd/assets/40290711/3feafbde-0cf6-4091-a5fc-fca2fd1ba617">
+
+```
+docker build -t flask-app .
+```
+- This command builds the Docker image using the Dockerfile in the current directory and tags it as flask-app.
+
+#### Step 5: Run the Docker Container 
+- After the image has been built, run a container based on it. Use the following command to start the container:
+
+![Screenshot 2023-07-10 at 11 30 12](https://github.com/OloruntobiOlurombi/containers-cicd/assets/40290711/23255c5d-3c9e-4cb8-9f10-b285885aa948)
+
+```
+docker run -p 5001:5000 flask-app
+```
+- This command starts the container and maps port 5000 from the container to port 5001 on the local machine.
+
+- You should now be able to access the Flask application by visiting http://localhost:5001 in your web browser. It will display the "Hello, World!" message.
+
+<img width="1135" alt="Screenshot 2023-07-10 at 11 30 25" src="https://github.com/OloruntobiOlurombi/containers-cicd/assets/40290711/a66ec31d-eac0-4658-8cb2-17a5e8bba8aa">
+
+#### Step 6: Set up CI with GitHub Workflows 
+
+- To set up CI with GitHub workflows, create a new file called .github/workflows/ci.yml in the project repository. Add the following content to it:
+
+```
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '0 19 * * SAT'
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_REPO }}:latest
+
+```
+
+- Make sure you have the DockerHub repository set up and accessible with your DockerHub account. If you haven't created a repository on DockerHub yet, please do so before proceeding.
+
+- Ensure
