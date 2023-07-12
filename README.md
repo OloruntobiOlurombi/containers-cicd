@@ -132,6 +132,8 @@ jobs:
 
 <img width="1359" alt="Screenshot 2023-07-11 at 11 01 51" src="https://github.com/OloruntobiOlurombi/containers-cicd/assets/40290711/d6ff9ca2-cc9b-4d71-a577-f6d33bef4729">
 
+- Check DockerHub repository for the image:
 
+<img width="1445" alt="Screenshot 2023-07-12 at 13 26 28" src="https://github.com/OloruntobiOlurombi/containers-cicd/assets/40290711/4ee21009-f86d-47e2-8f26-4ae814769f78">
 
 
